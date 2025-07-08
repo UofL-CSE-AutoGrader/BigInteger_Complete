@@ -18,18 +18,25 @@ Integer::Integer(int64_t n) {
 
 Integer::Integer(const std::string& str) {
     std::string s = str;
-    isNegative = false;
+    bool negative = false;
 
     if (!s.empty() && s[0] == '-') {
-        isNegative = true;
+        negative = true;
         s = s.substr(1);
     }
 
-    *this = Integer(0);
+    if (s.empty() || !std::all_of(s.begin(), s.end(), ::isdigit))
+        throw std::invalid_argument("Invalid character in input string");
+
+    *this = Integer(0); // build number from digits
     for (char c : s) {
-        if (!std::isdigit(c)) throw std::invalid_argument("Invalid character in input string");
         *this *= Integer(10);
         *this += Integer(c - '0');
+    }
+    
+    isNegative = negative; // set sign AFTER number is built
+    if (*this == Integer(0)) {
+        isNegative = false; // zero is not negative
     }
 }
 

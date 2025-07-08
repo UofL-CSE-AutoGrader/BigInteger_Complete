@@ -12,6 +12,7 @@ void Integer::normalize() {
 
 std::string Integer::toString() const {
     if (limbs.empty()) return "0";
+    if (limbs.size() == 1 && limbs[0] == 0) return "0";
 
     Integer temp = *this;
     temp.isNegative = false;
@@ -25,8 +26,9 @@ std::string Integer::toString() const {
         temp /= b;
     }
 
-    if (isNegative)
+    if (isNegative ) {
         result = "-" + result;
+    }
 
     return result.empty() ? "0" : result;
 }

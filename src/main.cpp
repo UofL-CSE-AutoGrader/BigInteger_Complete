@@ -86,5 +86,8 @@ int main() {
     if (++p1 == pp1 + 1 && --p1 == pp1 && p1++ == pp1 && p1-- == pp1+1) {
         std::cout << "Increment and decrement operators appear consistent." << std::endl;
     } 
+
+    Integer x("-1234567890123456789012345678901234567890");
+    std::cout << "x isNegative: " << x.isNegative << ", toString: " << x.toString() << std::endl;
     return 0;
 }

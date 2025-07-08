@@ -14,18 +14,21 @@ bool Integer::operator<(const Integer& rhs) const {
     if (isNegative != rhs.isNegative)
         return isNegative;
 
-    if (limbs.size() != rhs.limbs.size())
+    if (limbs.size() != rhs.limbs.size()) {
         return isNegative ? (limbs.size() > rhs.limbs.size())
                           : (limbs.size() < rhs.limbs.size());
-
-    for (size_t i = limbs.size(); i-- > 0; ) {
-        if (limbs[i] != rhs.limbs[i])
-            return isNegative ? (limbs[i] > rhs.limbs[i])
-                              : (limbs[i] < rhs.limbs[i]);
     }
 
-    return false;
+    for (size_t i = limbs.size(); i-- > 0;) {
+        if (limbs[i] != rhs.limbs[i]) {
+            return isNegative ? (limbs[i] > rhs.limbs[i])
+                              : (limbs[i] < rhs.limbs[i]);
+        }
+    }
+
+    return false; // Equal
 }
+
 
 // Less than or equal
 bool Integer::operator<=(const Integer& rhs) const {
