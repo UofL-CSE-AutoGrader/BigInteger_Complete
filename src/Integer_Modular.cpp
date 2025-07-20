@@ -28,7 +28,7 @@ static std::tuple<Integer, Integer, Integer> extended_gcd(const Integer& a, cons
 }
 
 // Returns x such that (a * x) % m == 1
-Integer mod_inverse(const Integer& a, const Integer& m) {
+Integer Integer::mod_inverse(const Integer& a, const Integer& m) {
     Integer nonneg_a = a;
     if (m == Integer(0)) {
         throw std::invalid_argument("Modulus must be non-zero");
