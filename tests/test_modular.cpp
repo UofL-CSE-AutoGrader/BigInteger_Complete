@@ -7,8 +7,8 @@ TEST(ModularTests, InverseMod) {
     int m = 11;
     Integer a_int(a);
     Integer m_int(m);
-    Integer inv = mod_inverse(a_int, m_int);
-    Integer inv2 = mod_inverse(a, m);
+    Integer inv = Integer::mod_inverse(a_int, m_int);
+    Integer inv2 = Integer::mod_inverse(a, m);
     EXPECT_EQ(inv, inv2); // Check if both methods yield the same result
     EXPECT_EQ((a_int * inv) % m_int, Integer(1));
     EXPECT_EQ((a * inv % m), Integer(1)); // Check if the inverse is correct
@@ -17,20 +17,20 @@ TEST(ModularTests, InverseMod) {
 
     
     // Edge case: Inverse of 0 should throw
-    EXPECT_THROW(mod_inverse(Integer(0), 5), std::invalid_argument);
-    EXPECT_THROW(mod_inverse(Integer(5), Integer(0)), std::invalid_argument); // Modulus cannot be zero
-    EXPECT_THROW(mod_inverse(Integer(5), Integer(-1)), std::invalid_argument); // Modulus cannot be negative
-    EXPECT_THROW(mod_inverse(Integer(5), Integer(10)), std::invalid_argument); // Inverse does not exist for these values
-    EXPECT_THROW(mod_inverse(Integer(4), 8), std::invalid_argument); // Inverse does not exist for these values
-    EXPECT_THROW(mod_inverse(Integer(4), 0), std::invalid_argument); // Modulus cannot be zero
-    EXPECT_THROW(mod_inverse(7, Integer(0)), std::invalid_argument); // Modulus cannot be zero
-    EXPECT_THROW(mod_inverse(7, -5), std::invalid_argument); // Modulus cannot be negative
+    EXPECT_THROW(Integer::mod_inverse(Integer(0), 5), std::invalid_argument);
+    EXPECT_THROW(Integer::mod_inverse(Integer(5), Integer(0)), std::invalid_argument); // Modulus cannot be zero
+    EXPECT_THROW(Integer::mod_inverse(Integer(5), Integer(-1)), std::invalid_argument); // Modulus cannot be negative
+    EXPECT_THROW(Integer::mod_inverse(Integer(5), Integer(10)), std::invalid_argument); // Inverse does not exist for these values
+    EXPECT_THROW(Integer::mod_inverse(Integer(4), 8), std::invalid_argument); // Inverse does not exist for these values
+    EXPECT_THROW(Integer::mod_inverse(Integer(4), 0), std::invalid_argument); // Modulus cannot be zero
+    EXPECT_THROW(Integer::mod_inverse(7, Integer(0)), std::invalid_argument); // Modulus cannot be zero
+    EXPECT_THROW(Integer::mod_inverse(7, -5), std::invalid_argument); // Modulus cannot be negative
 }
 
 TEST(ModularTests, LargeValueInverseMod) {
     Integer val1("4855234577788899234509871023409817234098172350987690227473");
     Integer val2("44854567892341234123409850987908709869876123409812734987654321113893929239484");
-    Integer inv = mod_inverse(val1, val2);
+    Integer inv = Integer::mod_inverse(val1, val2);
     EXPECT_TRUE((val1 * inv) % val2 == Integer(1));  // Check if the inverse is correct
     EXPECT_EQ(inv.toString(), "30658726546415385294719313215095585612681228684500232158304370609132223744965");
 }

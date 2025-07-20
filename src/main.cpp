@@ -1,28 +1,6 @@
 #include "Integer.hpp"
 #include <iostream>
-static std::tuple<Integer, Integer, Integer> extended_gcd(const Integer& a, const Integer& b) {
-    Integer r0 = a, r1 = b;
-    Integer s0 = Integer(1), s1 = Integer(0);
-    Integer t0 = Integer(0), t1 = Integer(1);
 
-    while (r1 != Integer(0)) {
-        Integer q = r0 / r1;
-
-        Integer remainder = r0 - q * r1;
-        r0 = q;
-        r1 = remainder;;
-
-        Integer s_temp = s0 - q * s1;
-        s0 = s1;
-        s1 = s_temp;
-
-        Integer t_temp = t0 - q * t1;
-        t0 = t1;
-        t1 = t_temp;
-    }
-
-    return {r0, s0, t0};  // gcd, x, y such that ax + by = gcd(a,b)
-}
 
 
 
@@ -67,11 +45,11 @@ int main() {
     std::cout << Integer::gcd(bbb,ccc)<<std::endl;
     std::cout << Integer::lcm(bbb,ccc)<<std::endl;
 
-    std::cout << mod_inverse(Integer(17), Integer(3120)) << std::endl;    
+    std::cout << Integer::mod_inverse(Integer(17), Integer(3120)) << std::endl;    
 
     Integer val1("4855234577788899234509871023409817234098172350987690227473");
     Integer val2("44854567892341234123409850987908709869876123409812734987654321113893929239484");
-    std::cout<<mod_inverse(val1, val2) << std::endl;
+    std::cout<<Integer::mod_inverse(val1, val2) << std::endl;
 
     Integer p1 = bbb.power(Integer(300)) % ccc;
     Integer p2 = bbb.power_mod(Integer(300), ccc);
