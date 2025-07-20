@@ -76,7 +76,7 @@ public:
     // Modular and exponentiation
     Integer power(const Integer& exponent) const;
     Integer power_mod(const Integer& exponent, const Integer& modulus) const;
-    Integer mod_inverse(const Integer& a, const Integer& m);
+    static Integer mod_inverse(const Integer& a, const Integer& m);
 
 
 };
