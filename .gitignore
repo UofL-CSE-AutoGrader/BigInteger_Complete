@@ -35,3 +35,5 @@
 build/
 # ignore the dist directory
 dist/
+
+.idea/
